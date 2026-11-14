@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdullah Shafi | Cyber Security Expert, Scout & Pro FC Mobile Gamer</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Orbitron for Cyber-Tech feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Tone.js for Retro Arcade Sound Effects -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <!-- Leaflet CSS for Interactive Bangladesh Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            cyber: ['Orbitron', 'sans-serif'],
+          },
+          colors: {
+            cyberbg: '#070b14',
+            cybercard: '#0e1628',
+            cybercyan: '#00f0ff',
+            argblue: '#75aadb',
+            goldaccent: '#ffd700',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #070b14;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    /* Cyber Grid Background */
+    .cyber-grid {
+      background-image: 
+        linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Glowing borders & text */
+    .glow-cyan {
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+    }
+    .glow-gold {
+      box-shadow: 0 0 22px rgba(255, 215, 0, 0.3);
+    }
+    .glow-arg {
+      box-shadow: 0 0 22px rgba(117, 170, 219, 0.35);
+    }
+
+    /* FC Mobile Card Styling */
+    .fc-card {
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 55%, #1e1b4b 100%);
+      border: 2px solid #ffd700;
+      clip-path: polygon(12% 0%, 88% 0%, 100% 14%, 100% 84%, 50% 100%, 0% 84%, 0% 14%);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .fc-card:hover {
+      transform: translateY(-6px) scale(1.06);
+      z-index: 30;
+    }
+    .fc-card-icon {
+      background: linear-gradient(145deg, #fefce8 0%, #fde047 35%, #ca8a04 100%);
+      color: #1e1b4b;
+      border: 2px solid #ffffff;
+    }
+    .fc-card-utoty {
+      background: linear-gradient(145deg, #0c4a6e 0%, #1d4ed8 45%, #312e81 100%);
+      border: 2px solid #38bdf8;
+    }
+
+    /* Football Pitch Stripes */
+    .pitch-bg {
+      background: repeating-linear-gradient(
+        0deg,
+        #14532d,
+        #14532d 42px,
+        #166534 42px,
+        #166534 84px
+      );
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070b14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00f0ff;
+    }
+
+    /* Pulsing Map Marker */
+    @keyframes pulseRing {
+      0% { transform: scale(0.8); opacity: 0.9; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+    .map-pulse {
+      animation: pulseRing 1.8s infinite ease-out;
+    }
+
+    /* Leaflet dark theme override */
+    .leaflet-container {
+      background: #0b1324 !important;
+      border-radius: 1rem;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="cyber-grid font-sans antialiased selection:bg-cyan-400 selection:text-slate-950">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#070b14]/85 border-b border-cyan-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand Logo -->
+        <a href="#home" class="flex items-center gap-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-slate-950 font-cyber font-black text-lg shadow-lg group-hover:scale-105 transition">
+            AS
+          </div>
+          <div>
+            <span class="font-cyber font-bold text-white tracking-wider text-sm sm:text-base block leading-none">ABDULLAH SHAFI</span>
+            <span class="text-[11px] text-cyan-400 font-medium tracking-widest uppercase">Cyber • Scout • FC Pro</span>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
+          <a href="#skills" class="hover:text-cyan-400 transition">Skills & Certs</a>
+          <a href="#scouting" class="hover:text-amber-400 transition">Scouting</a>
+          <a href="#argentina" class="hover:text-sky-300 transition">Argentina Drills</a>
+          <a href="#fcmobile" class="hover:text-yellow-400 transition">FC Mobile 4-3-3</a>
+          <a href="#arcade" class="hover:text-emerald-400 transition">12 Games Arcade</a>
+          <a href="#tools" class="hover:text-purple-400 transition">Smart Tools</a>
+          <a href="#location" class="hover:text-rose-400 transition">Narsingdi Map</a>
+        </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobileMenuBtn" class="lg:hidden p-2.5 rounded-xl bg-slate-800/80 text-cyan-400 border border-cyan-500/30 hover:bg-slate-700">
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-[#0b1222] border-b border-cyan-500/20 px-4 pt-2 pb-4 space-y-2">
+      <a href="#skills" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-slate-200">Skills & Certificates</a>
+      <a href="#scouting" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-amber-300">Scouting & President's Award</a>
+      <a href="#argentina" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-sky-300">Argentina Exercises</a>
+      <a href="#fcmobile" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-yellow-300">FC Mobile 4-3-3 Squad</a>
+      <a href="#arcade" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-emerald-300">12 Playable Games Arcade</a>
+      <a href="#tools" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-purple-300">Smart Detectors Lab</a>
+      <a href="#location" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-rose-300">Bangladesh Map (Narsingdi)</a>
+    </div>
+  </header>
+
+  <!-- 1. HERO & CYBER-TECH PROFILE SECTION -->
+  <section id="home" class="relative pt-10 pb-16 sm:pt-16 sm:pb-24 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Left Content -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs sm:text-sm font-semibold">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            Class 8 Student • Nasima Kadir Molla High School & Homes
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-cyber font-black text-white leading-tight">
+            Assalamu Alaikum, I'm <br/>
+            <span class="bg-gradient-to-r from-cyan-400 via-sky-300 to-amber-300 bg-clip-text text-transparent">
+              Abdullah Shafi
+            </span>
+          </h1>
+
+          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+            From <span class="text-cyan-400 font-semibold">Balanagar, Narsingdi, Bangladesh</span> — I am a passionate 
+            <span class="text-white font-semibold">Cyber Security Expert</span>, Full-Stack Web Builder, PC Hardware Architect, Robotics Maker, 
+            <span class="text-amber-400 font-semibold">Patrol Leader & President's Scout Award</span> achiever, die-hard <span class="text-sky-300 font-semibold">Argentina ⭐⭐⭐</span> supporter, and Pro <span class="text-yellow-400 font-semibold">FC Mobile</span> tactician!
+          </p>
+
+          <!-- Role Pills -->
+          <div class="flex flex-wrap gap-2.5 pt-1">
+            <span class="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-cyan-500/30 text-cyan-300 text-xs font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-halved"></i> Cyber Security Expert
+            </span>
+            <span class="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-blue-500/30 text-blue-300 text-xs font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-code"></i> Web & Software Dev
+            </span>
+            <span class="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-purple-500/30 text-purple-300 text-xs font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-microchip"></i> PC Builder & Robotics
+            </span>
+            <span class="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-amber-500/30 text-amber-300 text-xs font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-award"></i> President's Scout Award
+            </span>
+            <span class="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-yellow-500/30 text-yellow-300 text-xs font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-gamepad"></i> FC Mobile Pro (4-3-3)
+            </span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#arcade" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm sm:text-base shadow-lg shadow-cyan-500/25 transition flex items-center gap-2">
+              <i class="fa-solid fa-joystick"></i> Play 12 Arcade Games
+            </a>
+            <a href="#fcmobile" class="px-6 py-3.5 rounded-2xl bg-slate-800/90 hover:bg-slate-700 text-yellow-300 border border-yellow-500/40 font-bold text-sm sm:text-base transition flex items-center gap-2">
+              <i class="fa-solid fa-futbol"></i> Inspect FC Mobile Squad
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Cyber ID Card -->
+        <div class="lg:col-span-5">
+          <div class="rounded-3xl bg-[#0e1628]/95 border border-cyan-500/30 p-6 sm:p-8 glow-cyan relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-36 h-36 bg-cyan-500/10 rounded-full blur-2xl"></div>
+            <div class="flex items-center justify-between border-b border-slate-700/80 pb-4 mb-5">
+              <div class="flex items-center gap-3">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-400 via-sky-400 to-amber-300 p-0.5">
+                  <div class="w-full h-full rounded-2xl bg-slate-950 flex items-center justify-center">
+                    <i class="fa-solid fa-user-secret text-2xl text-cyan-400"></i>
+                  </div>
+                </div>
+                <div>
+                  <h2 class="font-cyber font-bold text-lg text-white">OPERATIVE ID: #BD-08</h2>
+                  <p class="text-xs text-emerald-400 font-mono"><i class="fa-solid fa-circle text-[8px] mr-1"></i> STATUS: ONLINE • NARSINGDI</p>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-400/30 text-xs font-bold">
+                LVL 99
+              </span>
+            </div>
+
+            <div class="space-y-3.5 text-sm">
+              <div class="flex justify-between items-center bg-slate-900/70 px-4 py-2.5 rounded-xl border border-slate-800">
+                <span class="text-slate-400"><i class="fa-solid fa-school text-cyan-400 mr-2"></i>School</span>
+                <span class="text-white font-semibold text-right">Nasima Kadir Molla High School & Homes</span>
+              </div>
+              <div class="flex justify-between items-center bg-slate-900/70 px-4 py-2.5 rounded-xl border border-slate-800">
+                <span class="text-slate-400"><i class="fa-solid fa-graduation-cap text-cyan-400 mr-2"></i>Class</span>
+                <span class="text-white font-semibold">Class Eight (8)</span>
+              </div>
+              <div class="flex justify-between items-center bg-slate-900/70 px-4 py-2.5 rounded-xl border border-slate-800">
+                <span class="text-slate-400"><i class="fa-solid fa-location-dot text-rose-400 mr-2"></i>Hometown</span>
+                <span class="text-white font-semibold">Balanagar, Narsingdi, Bangladesh</span>
+              </div>
+              <div class="flex justify-between items-center bg-slate-900/70 px-4 py-2.5 rounded-xl border border-slate-800">
+                <span class="text-slate-400"><i class="fa-solid fa-compass text-amber-400 mr-2"></i>Scout Rank</span>
+                <span class="text-amber-300 font-semibold">Patrol Leader (President's Award)</span>
+              </div>
+              <div class="flex justify-between items-center bg-slate-900/70 px-4 py-2.5 rounded-xl border border-slate-800">
+                <span class="text-slate-400"><i class="fa-solid fa-trophy text-sky-400 mr-2"></i>Fav Team</span>
+                <span class="text-sky-300 font-semibold">Argentina ⭐⭐⭐</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK, HARDWARE, ROBOTICS & CERTIFICATES VAULT -->
+  <section id="skills" class="py-16 bg-[#090f1d] border-y border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-cyan-400 font-cyber text-xs tracking-widest uppercase">Arsenal & Credentials</span>
+        <h2 class="text-3xl sm:text-4xl font-cyber font-bold text-white mt-2">Tech Skills, Robotics & Certificates</h2>
+        <p class="text-slate-400 mt-3 text-sm sm:text-base">
+          Mastering code, cyber defense, custom computer hardware assembly, robotics engineering, and certified achievements.
+        </p>
+      </div>
+
+      <!-- Skills Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
+        <div class="p-5 rounded-2xl bg-[#0e1628] border border-slate-800 hover:border-cyan-400/60 transition group text-center">
+          <i class="fa-solid fa-user-shield text-3xl text-cyan-400 mb-3 group-hover:scale-110 transition"></i>
+          <h3 class="font-bold text-white text-sm sm:text-base">Cyber Security</h3>
+          <p class="text-xs text-slate-400 mt-1">Ethical Defense & Network Safety</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0e1628] border border-slate-800 hover:border-orange-400/60 transition group text-center">
+          <i class="fa-brands fa-html5 text-3xl text-orange-500 mb-3 group-hover:scale-110 transition"></i>
+          <h3 class="font-bold text-white text-sm sm:text-base">HTML5 & CSS3</h3>
+          <p class="text-xs text-slate-400 mt-1">Modern Responsive Web UI</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0e1628] border border-slate-800 hover:border-yellow-400/60 transition group text-center">
+          <i class="fa-brands fa-js text-3xl text-yellow-400 mb-3 group-hover:scale-110 transition"></i>
+          <h3 class="font-bold text-white text-sm sm:text-base">JavaScript</h3>
+          <p class="text-xs text-slate-400 mt-1">Interactive Apps & Game Logic</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0e1628] border border-slate-800 hover:border-blue-400/60 transition group text-center">
+          <i class="fa-brands fa-python text-3xl text-blue-400 mb-3 group-hover:scale-110 transition"></i>
+          <h3 class="font-bold text-white text-sm sm:text-base">Python</h3>
+          <p class="text-xs text-slate-400 mt-1">Scripting, Automation & Security</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0e1628] border border-slate-800 hover:border-indigo-400/60 transition group text-center">
+          <i class="fa-solid fa-terminal text-3xl text-indigo-400 mb-3 group-hover:scale-110 transition"></i>
+          <h3 class="font-bold text-white text-sm sm:text-base">C & C++</h3>
+          <p class="text-xs text-slate-400 mt-1">Algorithms & Embedded Logic</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0e1628] border border-slate-800 hover:border-emerald-400/60 transition group text-center">
+          <i class="fa-solid fa-globe text-3xl text-emerald-400 mb-3 group-hover:scale-110 transition"></i>
+          <h3 class="font-bold text-white text-sm sm:text-base">Website Building</h3>
+          <p class="text-xs text-slate-400 mt-1">End-to-End Site Deployment</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0e1628] border border-slate-800 hover:border-rose-400/60 transition group text-center">
+          <i class="fa-solid fa-desktop text-3xl text-rose-400 mb-3 group-hover:scale-110 transition"></i>
+          <h3 class="font-bold text-white text-sm sm:text-base">PC Building</h3>
+          <p class="text-xs text-slate-400 mt-1">Custom Rig Assembly & Tuning</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0e1628] border border-slate-800 hover:border-purple-400/60 transition group text-center">
+          <i class="fa-solid fa-memory text-3xl text-purple-400 mb-3 group-hover:scale-110 transition"></i>
+          <h3 class="font-bold text-white text-sm sm:text-base">Computer Parts</h3>
+          <p class="text-xs text-slate-400 mt-1">CPU, GPU, RAM & Motherboard Diagnostics</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0e1628] border border-slate-800 hover:border-teal-400/60 transition group text-center">
+          <i class="fa-solid fa-robot text-3xl text-teal-400 mb-3 group-hover:scale-110 transition"></i>
+          <h3 class="font-bold text-white text-sm sm:text-base">Robotics Making</h3>
+          <p class="text-xs text-slate-400 mt-1">Sensors, Microcontrollers & Bots</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0e1628] border border-amber-500/40 hover:border-amber-400 transition group text-center">
+          <i class="fa-solid fa-certificate text-3xl text-amber-400 mb-3 group-hover:scale-110 transition"></i>
+          <h3 class="font-bold text-white text-sm sm:text-base">Certified Pro</h3>
+          <p class="text-xs text-amber-300 mt-1">Multiple Verified Honors</p>
+        </div>
+      </div>
+
+      <!-- Verified Certificates Vault -->
+      <div class="rounded-3xl bg-[#0e1628] border border-cyan-500/25 p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h3 class="font-cyber font-bold text-xl text-white flex items-center gap-2">
+              <i class="fa-solid fa-vault text-cyan-400"></i> Verified Certificates Vault
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400">Click any certificate to inspect Abdullah Shafi's credential details</p>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 text-xs font-semibold self-start sm:self-auto">
+            6 Official Credentials
+          </span>
+        </div>
+
+        <div id="certGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Populated cleanly via JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. SCOUTING & LEADERSHIP HONOR SECTION -->
+  <section id="scouting" class="py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl bg-gradient-to-br from-[#0f1f18] via-[#0e1628] to-[#1c1917] border border-amber-500/30 p-6 sm:p-10 glow-gold">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Custom SVG Emblem -->
+          <div class="lg:col-span-4 flex flex-col items-center text-center">
+            <div class="w-44 h-44 rounded-full bg-amber-500/10 border-2 border-amber-400/50 flex items-center justify-center p-4 shadow-xl">
+              <svg viewBox="0 0 200 200" class="w-full h-full">
+                <defs>
+                  <linearGradient id="scoutGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fde047" />
+                    <stop offset="50%" stop-color="#f59e0b" />
+                    <stop offset="100%" stop-color="#b45309" />
+                  </linearGradient>
+                </defs>
+                <!-- Outer Laurel Circle -->
+                <circle cx="100" cy="100" r="88" fill="none" stroke="url(#scoutGold)" stroke-width="4" stroke-dasharray="8 4" />
+                <circle cx="100" cy="100" r="76" fill="#064e3b" stroke="#fbbf24" stroke-width="2.5" />
+                <!-- Fleur-de-lis Inspired Scout Emblem -->
+                <path d="M100 32 C112 58, 118 76, 100 105 C82 76, 88 58, 100 32 Z" fill="url(#scoutGold)" />
+                <path d="M100 102 C75 82, 52 88, 56 112 C60 128, 82 122, 95 110 Z" fill="url(#scoutGold)" />
+                <path d="M100 102 C125 82, 148 88, 144 112 C140 128, 118 122, 105 110 Z" fill="url(#scoutGold)" />
+                <rect x="74" y="114" width="52" height="10" rx="5" fill="#fef08a" />
+                <path d="M90 124 L100 152 L110 124 Z" fill="url(#scoutGold)" />
+                <!-- Stars -->
+                <text x="100" y="170" text-anchor="middle" fill="#fde047" font-size="11" font-weight="bold" font-family="sans-serif">PRESIDENT'S SCOUT</text>
+              </svg>
+            </div>
+            <span class="mt-4 px-4 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-bold tracking-wider uppercase">
+              Bangladesh Scouts • Narsingdi
+            </span>
+          </div>
+
+          <!-- Leadership Details -->
+          <div class="lg:col-span-8 space-y-5">
+            <div class="inline-flex items-center gap-2 text-amber-400 font-cyber text-xs uppercase tracking-widest">
+              <i class="fa-solid fa-medal"></i> National Scouting Excellence
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-cyber font-bold text-white">
+              Patrol Leader & <span class="text-amber-400">President's Scout Award</span> Winner
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Serving proudly as a <strong class="text-white">Patrol Leader</strong> in my school troop at Nasima Kadir Molla High School & Homes, I lead youth expeditions, community service, disaster preparedness, and outdoor survival camps. Achieving the prestigious <strong class="text-amber-300">President's Scout Award</strong> reflects discipline, integrity, and service to Bangladesh.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+              <div class="p-4 rounded-2xl bg-slate-900/80 border border-emerald-500/30">
+                <div class="text-emerald-400 font-bold text-sm mb-1"><i class="fa-solid fa-users-gear mr-1.5"></i>Troop Leadership</div>
+                <p class="text-xs text-slate-400">Commanding & mentoring fellow scouts as Patrol Leader with teamwork.</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-slate-900/80 border border-amber-500/30">
+                <div class="text-amber-400 font-bold text-sm mb-1"><i class="fa-solid fa-award mr-1.5"></i>President's Award</div>
+                <p class="text-xs text-slate-400">Highest honor recognizing skill badges, camps, and civic duty.</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-slate-900/80 border border-cyan-500/30">
+                <div class="text-cyan-400 font-bold text-sm mb-1"><i class="fa-solid fa-compass mr-1.5"></i>Scout Motto</div>
+                <p class="text-xs text-slate-400">"Be Prepared" — Always ready to help others in any situation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. FOOTBALL & ARGENTINA NATIONAL TEAM HUB ("LA ALBICELESTE" ZONE) -->
+  <section id="argentina" class="py-16 bg-gradient-to-b from-[#070b14] via-[#0b192c] to-[#070b14] border-y border-sky-400/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-400/15 border border-sky-400/40 text-sky-300 text-xs font-bold mb-3">
+            🇦🇷 LA ALBICELESTE • 3X WORLD CHAMPIONS ⭐⭐⭐
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-cyber font-bold text-white">
+            Argentina's Best Football <span class="text-sky-400">Exercises & Drills</span>
+          </h2>
+          <p class="text-slate-300 mt-2 text-sm sm:text-base max-w-2xl">
+            Train like Lionel Messi, Diego Maradona, and Alexis Mac Allister! Use the built-in interactive drill timer below to master Argentina's signature high-tempo passing, dribbling, and agility routines.
+          </p>
+        </div>
+
+        <!-- Interactive Drill Stopwatch / Timer Widget -->
+        <div class="rounded-2xl bg-[#0e1628] border border-sky-400/40 p-4 sm:p-5 glow-arg flex flex-col sm:flex-row items-center gap-4">
+          <div class="text-center sm:text-left">
+            <span class="text-[11px] uppercase tracking-wider text-sky-300 font-bold block">Training Drill Timer</span>
+            <span id="drillTimerDisplay" class="font-cyber text-3xl font-black text-white">01:00</span>
+            <span id="activeDrillLabel" class="text-xs text-slate-400 block truncate max-w-[180px]">Select a drill below</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="startDrillTimer()" class="px-3.5 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs transition">
+              <i class="fa-solid fa-play mr-1"></i>Start
+            </button>
+            <button onclick="pauseDrillTimer()" class="px-3.5 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition">
+              <i class="fa-solid fa-pause"></i>
+            </button>
+            <button onclick="resetDrillTimer()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Argentina Exercises Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Drill 1 -->
+        <div class="rounded-2xl bg-[#0e1628]/90 border border-sky-400/30 p-6 hover:border-sky-300 transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-bold">DRILL #01 • PASSING</span>
+              <span class="text-amber-400 text-xs font-bold"><i class="fa-solid fa-clock mr-1"></i>90 Sec</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">La Scaloneta 1-Touch Rondo</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Quick one-touch triangle passing inside a tight 8m x 8m grid with high pressing. Builds rapid vision, body orientation, and calm under pressure just like Argentina's midfield.
+            </p>
+          </div>
+          <button onclick="selectDrill('La Scaloneta 1-Touch Rondo', 90)" class="w-full py-2.5 rounded-xl bg-sky-500/15 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-400/40 font-bold text-xs transition">
+            Load 90s Rondo Timer
+          </button>
+        </div>
+
+        <!-- Drill 2 -->
+        <div class="rounded-2xl bg-[#0e1628]/90 border border-sky-400/30 p-6 hover:border-sky-300 transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-bold">DRILL #02 • DRIBBLING</span>
+              <span class="text-amber-400 text-xs font-bold"><i class="fa-solid fa-clock mr-1"></i>60 Sec</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Messi Low-Center Slalom Weave</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Set 8 cones 1 meter apart. Dribble at max speed using only your left/right inside and outside foot cuts, keeping knees bent and micro-touches close to your boots.
+            </p>
+          </div>
+          <button onclick="selectDrill('Messi Low-Center Slalom', 60)" class="w-full py-2.5 rounded-xl bg-sky-500/15 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-400/40 font-bold text-xs transition">
+            Load 60s Slalom Timer
+          </button>
+        </div>
+
+        <!-- Drill 3 -->
+        <div class="rounded-2xl bg-[#0e1628]/90 border border-sky-400/30 p-6 hover:border-sky-300 transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-bold">DRILL #03 • EXPLOSIVE PACE</span>
+              <span class="text-amber-400 text-xs font-bold"><i class="fa-solid fa-clock mr-1"></i>45 Sec</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Albiceleste Counter-Attack Sprints</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              5m backpedal, explosive 20m sprint, sharp 90-degree cut, and low driven shot into the bottom corner. Trains lethal transition speed from defense to attack.
+            </p>
+          </div>
+          <button onclick="selectDrill('Albiceleste Counter Sprints', 45)" class="w-full py-2.5 rounded-xl bg-sky-500/15 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-400/40 font-bold text-xs transition">
+            Load 45s Sprint Timer
+          </button>
+        </div>
+
+        <!-- Drill 4 -->
+        <div class="rounded-2xl bg-[#0e1628]/90 border border-sky-400/30 p-6 hover:border-sky-300 transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-bold">DRILL #04 • FIRST TOUCH</span>
+              <span class="text-amber-400 text-xs font-bold"><i class="fa-solid fa-clock mr-1"></i>75 Sec</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Maradona Aerial Trap & Turn</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Toss the ball high, cushion it dead on the instep or thigh while half-turning away from an imaginary defender, and accelerate into open space.
+            </p>
+          </div>
+          <button onclick="selectDrill('Maradona Aerial Trap & Turn', 75)" class="w-full py-2.5 rounded-xl bg-sky-500/15 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-400/40 font-bold text-xs transition">
+            Load 75s Control Timer
+          </button>
+        </div>
+
+        <!-- Drill 5 -->
+        <div class="rounded-2xl bg-[#0e1628]/90 border border-sky-400/30 p-6 hover:border-sky-300 transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-bold">DRILL #05 • SET PIECES</span>
+              <span class="text-amber-400 text-xs font-bold"><i class="fa-solid fa-clock mr-1"></i>120 Sec</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Top-Corner Curl & Free-Kick Mastery</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Place the ball 20 yards out. Strike with locked ankle and follow-through wrap to bend the ball over the wall into the top postage stamp.
+            </p>
+          </div>
+          <button onclick="selectDrill('Top-Corner Free-Kick Mastery', 120)" class="w-full py-2.5 rounded-xl bg-sky-500/15 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-400/40 font-bold text-xs transition">
+            Load 120s Free-Kick Timer
+          </button>
+        </div>
+
+        <!-- Drill 6 -->
+        <div class="rounded-2xl bg-[#0e1628]/90 border border-sky-400/30 p-6 hover:border-sky-300 transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-bold">DRILL #06 • CORE & BALANCE</span>
+              <span class="text-amber-400 text-xs font-bold"><i class="fa-solid fa-clock mr-1"></i>60 Sec</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Shielding & Single-Leg Balance</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Single-leg hop holds + plank shoulder taps to build core stability so defenders can never knock you off the ball during 1v1 duels.
+            </p>
+          </div>
+          <button onclick="selectDrill('Core & Shielding Balance', 60)" class="w-full py-2.5 rounded-xl bg-sky-500/15 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-400/40 font-bold text-xs transition">
+            Load 60s Stability Timer
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PRO FC MOBILE SQUAD BUILDER & PITCH (4-3-3 ATTACKING) -->
+  <section id="fcmobile" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-yellow-400 font-cyber text-xs uppercase tracking-widest">Pro Gamer Lineup • 4-3-3 Attacking</span>
+          <h2 class="text-3xl sm:text-4xl font-cyber font-bold text-white mt-1">
+            Abdullah Shafi's <span class="text-yellow-400">FC Mobile</span> Ultimate XI
+          </h2>
+          <p class="text-slate-400 text-sm mt-1">
+            Click any player card to view full stats! Use the LB selector to customize your Left Back anytime.
+          </p>
+        </div>
+
+        <!-- Custom Left Back Selector -->
+        <div class="flex flex-wrap items-center gap-3 bg-[#0e1628] p-3 rounded-2xl border border-yellow-500/30">
+          <label for="lbSelector" class="text-xs font-bold text-yellow-300 uppercase">
+            <i class="fa-solid fa-sliders mr-1"></i>Choose Left Back (LB):
+          </label>
+          <select id="lbSelector" onchange="updateLeftBack(this.value)" class="bg-slate-900 text-white text-xs font-semibold px-3 py-2 rounded-xl border border-slate-700 focus:outline-none focus:border-yellow-400">
+            <option value="Roberto Carlos">Roberto Carlos (107 ICON)</option>
+            <option value="Theo Hernández">Theo Hernández (106 UTOTY)</option>
+            <option value="Alphonso Davies">Alphonso Davies (105)</option>
+            <option value="Nicolás Tagliafico">Nicolás Tagliafico (104 ARG)</option>
+            <option value="Joško Gvardiol">Joško Gvardiol (105)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Football Pitch Container -->
+      <div class="rounded-3xl pitch-bg border-4 border-emerald-400/40 p-4 sm:p-8 shadow-2xl relative overflow-hidden">
+        <!-- Pitch Markings Overlay -->
+        <div class="absolute inset-4 border-2 border-white/25 rounded-2xl pointer-events-none"></div>
+        <div class="absolute top-1/2 left-4 right-4 h-0.5 bg-white/25 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full border-2 border-white/25 pointer-events-none"></div>
+
+        <!-- Squad OVR Header Badge -->
+        <div class="relative z-10 flex justify-between items-center mb-6">
+          <div class="px-4 py-1.5 rounded-xl bg-slate-950/80 border border-yellow-400/50 text-yellow-300 font-cyber font-bold text-xs sm:text-sm">
+            TEAM OVR: 108 • CHEM: 100%
+          </div>
+          <div class="px-4 py-1.5 rounded-xl bg-slate-950/80 border border-cyan-400/50 text-cyan-300 font-cyber font-bold text-xs sm:text-sm">
+            FORMATION: 4-3-3 ATTACK
+          </div>
+        </div>
+
+        <!-- 4-3-3 Attacking Rows -->
+        <div id="fcPitchGrid" class="relative z-10 space-y-6 sm:space-y-8 py-2">
+          <!-- Row 1: Attackers (LW - ST - RW) -->
+          <div class="grid grid-cols-3 gap-2 sm:gap-6 max-w-3xl mx-auto justify-items-center" id="rowAttack"></div>
+
+          <!-- Row 2: CAM (Center Attacking Mid) -->
+          <div class="flex justify-center" id="rowCam"></div>
+
+          <!-- Row 3: CMs (Left CM - Right CM) -->
+          <div class="grid grid-cols-2 gap-4 sm:gap-12 max-w-xl mx-auto justify-items-center" id="rowMid"></div>
+
+          <!-- Row 4: Defenders (LB - CB - CB - RB) -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-4xl mx-auto justify-items-center" id="rowDef"></div>
+
+          <!-- Row 5: Goalkeeper (GK) -->
+          <div class="flex justify-center pt-1" id="rowGk"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 12 PLAYABLE MINI-GAMES ARCADE -->
+  <section id="arcade" class="py-16 bg-[#090f1d] border-y border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-emerald-400 font-cyber text-xs uppercase tracking-widest">Interactive Cyber Arcade • Sound FX Enabled</span>
+        <h2 class="text-3xl sm:text-4xl font-cyber font-bold text-white mt-2">
+          12 Playable Mini-Games Hub
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-2">
+          Jump into action! Select any of the 12 built-in games below—including Cyber Space Defender, Argentina Dribble Rush, Snake, Penalty Shootout, and more.
+        </p>
+      </div>
+
+      <!-- 12 Game Selector Buttons -->
+      <div id="gameSelectorGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Active Game Arena Container -->
+      <div class="rounded-3xl bg-[#0e1628] border border-cyan-500/30 p-4 sm:p-8 glow-cyan">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4 mb-6">
+          <div>
+            <h3 id="activeGameTitle" class="font-cyber font-bold text-xl sm:text-2xl text-cyan-400">1. Cyber Space Defender</h3>
+            <p id="activeGameDesc" class="text-xs sm:text-sm text-slate-400">Blast incoming malware ships! Use Left/Right Arrows & Spacebar or Touch Controls.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button id="soundToggleBtn" onclick="toggleArcadeSound()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 font-bold text-xs transition">
+              <i class="fa-solid fa-volume-high mr-1"></i>SFX: ON
+            </button>
+            <span id="activeGameScore" class="px-4 py-1.5 rounded-xl bg-slate-900 border border-cyan-500/30 text-cyan-300 font-cyber text-sm font-bold">
+              Score: 0
+            </span>
+            <button onclick="restartCurrentGame()" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm transition">
+              <i class="fa-solid fa-rotate-right mr-1"></i>Restart
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Game Stage -->
+        <div id="gameStage" class="min-h-[360px] flex flex-col items-center justify-center">
+          <!-- Active Game UI injected here -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. SMART UTILITY TOOLS LAB -->
+  <section id="tools" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-purple-400 font-cyber text-xs uppercase tracking-widest">Algorithmic Calculators</span>
+        <h2 class="text-3xl sm:text-4xl font-cyber font-bold text-white mt-2">
+          Smart Number & Year Detectors Lab
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-2">
+          Instant Python-grade logic powered by JavaScript: Leap Year Detector, Odd & Even Detector, and Smaller & Bigger Number Comparator.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Tool 1: Leap Year Detector -->
+        <div class="rounded-3xl bg-[#0e1628] border border-cyan-500/30 p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-calendar-check"></i>
+            </div>
+            <h3 class="font-cyber font-bold text-xl text-white mb-2">Leap Year Detector</h3>
+            <p class="text-xs text-slate-400 mb-4">
+              Enter any year (e.g., 2024, 2026, 2000, 1900) to verify leap year rules (divisible by 4, 100, and 400).
+            </p>
+            <input type="number" id="leapYearInput" placeholder="Enter year (e.g. 2028)" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400 mb-3" />
+            <button onclick="checkLeapYear()" class="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm transition">
+              Detect Leap Year
+            </button>
+          </div>
+          <div id="leapYearResult" class="mt-4 p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-sm text-slate-300 min-h-[84px]">
+            Result will appear here...
+          </div>
+        </div>
+
+        <!-- Tool 2: Odd & Even Number Detector -->
+        <div class="rounded-3xl bg-[#0e1628] border border-purple-500/30 p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-400 flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-divide"></i>
+            </div>
+            <h3 class="font-cyber font-bold text-xl text-white mb-2">Odd & Even Detector</h3>
+            <p class="text-xs text-slate-400 mb-4">
+              Enter any integer (even huge 20-digit numbers!) to detect Odd/Even status plus bonus mathematical insights.
+            </p>
+            <input type="text" id="oddEvenInput" placeholder="Enter any integer (e.g. 77492)" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-purple-400 mb-3" />
+            <button onclick="checkOddEven()" class="w-full py-3 rounded-xl bg-purple-500 hover:bg-purple-400 text-white font-bold text-sm transition">
+              Detect Odd / Even
+            </button>
+          </div>
+          <div id="oddEvenResult" class="mt-4 p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-sm text-slate-300 min-h-[84px]">
+            Result will appear here...
+          </div>
+        </div>
+
+        <!-- Tool 3: Smaller & Bigger Number Detector -->
+        <div class="rounded-3xl bg-[#0e1628] border border-amber-500/30 p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <h3 class="font-cyber font-bold text-xl text-white mb-2">Smaller & Bigger Detector</h3>
+            <p class="text-xs text-slate-400 mb-4">
+              Enter two or more numbers separated by commas or spaces (e.g., 45, 12, 99, 7) to find the Biggest & Smallest!
+            </p>
+            <input type="text" id="compareNumbersInput" placeholder="e.g. 120, 45, 890, 19" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400 mb-3" />
+            <button onclick="compareNumbers()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition">
+              Compare Numbers
+            </button>
+          </div>
+          <div id="compareNumbersResult" class="mt-4 p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-sm text-slate-300 min-h-[84px]">
+            Result will appear here...
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. INTERACTIVE BANGLADESH MAP & NARSINGDI LOCATION PIN -->
+  <section id="location" class="py-16 bg-[#090f1d] border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-rose-400 font-cyber text-xs uppercase tracking-widest">Geolocation Radar • Bangladesh</span>
+          <h2 class="text-3xl sm:text-4xl font-cyber font-bold text-white mt-1">
+            Bangladesh Map & <span class="text-rose-400">Narsingdi</span> HQ Pin
+          </h2>
+          <p class="text-slate-400 text-sm mt-1">
+            Pinpointing Abdullah Shafi's hometown & school at <strong class="text-white">Balanagar, Narsingdi, Dhaka Division, Bangladesh</strong>.
+          </p>
+        </div>
+
+        <div class="flex gap-2">
+          <button onclick="zoomToNarsingdi()" class="px-4 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-400 text-white font-bold text-xs transition">
+            <i class="fa-solid fa-crosshairs mr-1.5"></i>Focus Balanagar, Narsingdi
+          </button>
+          <button onclick="zoomToBangladesh()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 font-bold text-xs transition">
+            <i class="fa-solid fa-map mr-1.5"></i>Full Bangladesh View
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <!-- Map Box -->
+        <div class="lg:col-span-8 rounded-3xl bg-[#0e1628] border border-rose-500/30 p-3 shadow-2xl">
+          <div id="bangladeshMap" class="w-full h-[380px] sm:h-[440px] rounded-2xl"></div>
+        </div>
+
+        <!-- Location Intelligence Panel -->
+        <div class="lg:col-span-4 rounded-3xl bg-[#0e1628] border border-slate-800 p-6 flex flex-col justify-between space-y-5">
+          <div class="space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+              🇧🇩 PEOPLE'S REPUBLIC OF BANGLADESH
+            </div>
+            <h3 class="font-cyber font-bold text-xl text-white">Balanagar, Narsingdi</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Located in Narsingdi District (Dhaka Division), home to <strong class="text-cyan-300">Nasima Kadir Molla High School & Homes</strong>—one of the most renowned educational institutions in Bangladesh.
+            </p>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex justify-between">
+                <span class="text-slate-400">Coordinates:</span>
+                <span class="text-cyan-400 font-mono font-bold">23.9229° N, 90.7177° E</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex justify-between">
+                <span class="text-slate-400">District / Division:</span>
+                <span class="text-white font-semibold">Narsingdi, Dhaka Division</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex justify-between">
+                <span class="text-slate-400">Area / Landmark:</span>
+                <span class="text-rose-300 font-semibold">Balanagar • NKMHS & Homes</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/80 to-rose-950/60 border border-emerald-500/30 text-xs text-slate-200">
+            <i class="fa-solid fa-satellite-dish text-emerald-400 mr-1.5"></i>
+            <strong>Radar Tip:</strong> Click the glowing pin on the map to view Abdullah Shafi's live HQ tag!
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 border-t border-slate-800/80 text-center text-slate-400 text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4">
+      <p class="font-cyber font-bold text-white text-base mb-1">ABDULLAH SHAFI</p>
+      <p>Class 8 • Nasima Kadir Molla High School & Homes • Balanagar, Narsingdi, Bangladesh 🇧🇩</p>
+      <p class="mt-2 text-slate-500">Cyber Security • Robotics • President's Scout • Argentina ⭐⭐⭐ • FC Mobile Pro</p>
+    </div>
+  </footer>
+
+  <!-- Custom Modal for Player Card & Certificate Inspection -->
+  <div id="infoModal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#0e1628] border border-cyan-400/40 rounded-3xl max-w-md w-full p-6 relative shadow-2xl">
+      <button onclick="closeModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- MAIN APPLICATION JAVASCRIPT -->
+  <script>
+    // ==========================================
+    // 0. MOBILE MENU & MODAL HELPERS
+    // ==========================================
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+    function openModal(html) {
+      document.getElementById('modalContent').innerHTML = html;
+      document.getElementById('infoModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('infoModal').classList.add('hidden');
+    }
+
+    // ==========================================
+    // 1. CERTIFICATES VAULT DATA & RENDER
+    // ==========================================
+    const certificates = [
+      {
+        title: "President's Scout Award",
+        issuer: "Bangladesh Scouts",
+        category: "Leadership & Scouting",
+        color: "amber",
+        icon: "fa-award",
+        desc: "Awarded for exemplary scouting leadership as Patrol Leader, campcraft mastery, and community service in Narsingdi."
+      },
+      {
+        title: "Cyber Security & Ethical Defense",
+        issuer: "Cyber Tech Academy",
+        category: "Cyber Security",
+        color: "cyan",
+        icon: "fa-shield-halved",
+        desc: "Certified in network protection, threat analysis, password cryptography, and safe digital architecture."
+      },
+      {
+        title: "Full-Stack Web Development",
+        issuer: "Digital Youth Makers",
+        category: "HTML • CSS • JS",
+        color: "blue",
+        icon: "fa-code",
+        desc: "Recognized for building responsive, modern interactive websites using HTML5, CSS3, and JavaScript."
+      },
+      {
+        title: "Python, C & C++ Programming",
+        issuer: "Junior Coders Olympiad",
+        category: "Software Engineering",
+        color: "indigo",
+        icon: "fa-terminal",
+        desc: "Certified proficiency in Python automation, C structured logic, and C++ algorithmic problem solving."
+      },
+      {
+        title: "Robotics & Embedded Systems",
+        issuer: "Bangladesh Robotics Lab",
+        category: "Robotics Making",
+        color: "teal",
+        icon: "fa-robot",
+        desc: "Awarded for designing autonomous sensor-guided robots and microcontroller hardware prototypes."
+      },
+      {
+        title: "PC Hardware & Custom Rig Building",
+        issuer: "Hardware Tech Guild",
+        category: "Computer Parts",
+        color: "rose",
+        icon: "fa-microchip",
+        desc: "Certified specialist in CPU/GPU compatibility, custom PC assembly, BIOS optimization, and diagnostics."
+      }
+    ];
+
+    function renderCertificates() {
+      const grid = document.getElementById('certGrid');
+      grid.innerHTML = certificates.map((c, idx) => `
+        <div onclick="inspectCert(${idx})" class="cursor-pointer p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-400/50 transition group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="w-10 h-10 rounded-xl bg-slate-800 text-cyan-400 flex items-center justify-center text-lg group-hover:scale-110 transition">
+              <i class="fa-solid ${c.icon}"></i>
+            </span>
+            <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-slate-800 text-slate-300">${c.category}</span>
+          </div>
+          <h4 class="font-bold text-white text-base group-hover:text-cyan-300 transition">${c.title}</h4>
+          <p class="text-xs text-slate-400 mt-1">Issued by: ${c.issuer}</p>
+          <div class="mt-3 text-xs text-cyan-400 font-semibold flex items-center gap-1">
+            <span>View Credential</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function inspectCert(idx) {
+      const c = certificates[idx];
+      openModal(`
+        <div class="text-center space-y-4">
+          <div class="w-16 h-16 rounded-2xl bg-cyan-500/15 border border-cyan-400/40 text-cyan-400 flex items-center justify-center text-3xl mx-auto">
+            <i class="fa-solid ${c.icon}"></i>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-amber-400/15 text-amber-300 text-xs font-bold uppercase">Verified Certificate</span>
+          <h3 class="font-cyber font-bold text-xl text-white">${c.title}</h3>
+          <p class="text-xs text-cyan-300 font-semibold">Recipient: Abdullah Shafi • Issued by ${c.issuer}</p>
+          <p class="text-sm text-slate-300 leading-relaxed bg-slate-900/90 p-4 rounded-2xl border border-slate-800">
+            ${c.desc}
+          </p>
+        </div>
+      `);
+    }
+
+    // ==========================================
+    // 2. ARGENTINA DRILL TIMER
+    // ==========================================
+    let drillSeconds = 60;
+    let drillInitial = 60;
+    let drillInterval = null;
+
+    function updateTimerUI() {
+      const mins = String(Math.floor(drillSeconds / 60)).padStart(2, '0');
+      const secs = String(drillSeconds % 60).padStart(2, '0');
+      document.getElementById('drillTimerDisplay').textContent = `${mins}:${secs}`;
+    }
+
+    function selectDrill(name, seconds) {
+      pauseDrillTimer();
+      drillInitial = seconds;
+      drillSeconds = seconds;
+      document.getElementById('activeDrillLabel').textContent = name;
+      updateTimerUI();
+      startDrillTimer();
+    }
+
+    function startDrillTimer() {
+      if (drillInterval) return;
+      drillInterval = setInterval(() => {
+        if (drillSeconds > 0) {
+          drillSeconds--;
+          updateTimerUI();
+        } else {
+          pauseDrillTimer();
+          document.getElementById('activeDrillLabel').textContent = "Drill Complete! ¡Vamos Argentina!";
+        }
+      }, 1000);
+    }
+
+    function pauseDrillTimer() {
+      clearInterval(drillInterval);
+      drillInterval = null;
+    }
+
+    function resetDrillTimer() {
+      pauseDrillTimer();
+      drillSeconds = drillInitial;
+      updateTimerUI();
+    }
+
+    // ==========================================
+    // 3. PRO FC MOBILE 4-3-3 ATTACKING SQUAD
+    // ==========================================
+    const lbPresets = {
+      "Roberto Carlos": { name: "Roberto Carlos", pos: "LB", ovr: 107, type: "icon", nation: "🇧🇷", stats: { PAC: 112, SHO: 102, PAS: 104, DRI: 106, DEF: 103, PHY: 104 } },
+      "Theo Hernández": { name: "Theo Hernández", pos: "LB", ovr: 106, type: "utoty", nation: "🇫🇷", stats: { PAC: 114, SHO: 92, PAS: 98, DRI: 103, DEF: 102, PHY: 105 } },
+      "Alphonso Davies": { name: "Alphonso Davies", pos: "LB", ovr: 105, type: "utoty", nation: "🇨🇦", stats: { PAC: 116, SHO: 88, PAS: 97, DRI: 106, DEF: 99, PHY: 100 } },
+      "Nicolás Tagliafico": { name: "Tagliafico", pos: "LB", ovr: 104, type: "utoty", nation: "🇦🇷", stats: { PAC: 103, SHO: 84, PAS: 96, DRI: 98, DEF: 105, PHY: 103 } },
+      "Joško Gvardiol": { name: "Gvardiol", pos: "LB", ovr: 105, type: "utoty", nation: "🇭🇷", stats: { PAC: 102, SHO: 85, PAS: 95, DRI: 96, DEF: 107, PHY: 108 } }
+    };
+
+    const squadData = {
+      attack: [
+        { name: "Barnes", fullName: "Harvey Barnes", pos: "LW", ovr: 104, type: "utoty", nation: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", stats: { PAC: 109, SHO: 103, PAS: 99, DRI: 107, DEF: 54, PHY: 88 } },
+        { name: "Dalglish", fullName: "Kenny Dalglish", pos: "ST", ovr: 108, type: "icon", nation: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", stats: { PAC: 110, SHO: 113, PAS: 102, DRI: 112, DEF: 52, PHY: 94 } },
+        { name: "Doué", fullName: "Désiré Doué", pos: "RW", ovr: 105, type: "utoty", nation: "🇫🇷", stats: { PAC: 111, SHO: 101, PAS: 103, DRI: 112, DEF: 62, PHY: 89 } }
+      ],
+      cam: [
+        { name: "Maradona", fullName: "Diego Maradona", pos: "CAM", ovr: 110, type: "icon", nation: "🇦🇷", stats: { PAC: 112, SHO: 111, PAS: 113, DRI: 116, DEF: 55, PHY: 92 } }
+      ],
+      mid: [
+        { name: "Mac Allister", fullName: "Alexis Mac Allister", pos: "CM", ovr: 106, type: "utoty", nation: "🇦🇷", stats: { PAC: 98, SHO: 103, PAS: 110, DRI: 107, DEF: 99, PHY: 98 } },
+        { name: "João Neves", fullName: "João Neves", pos: "CM", ovr: 105, type: "utoty", nation: "🇵🇹", stats: { PAC: 101, SHO: 95, PAS: 108, DRI: 107, DEF: 103, PHY: 99 } }
+      ],
+      def: [
+        lbPresets["Roberto Carlos"],
+        { name: "Kalulu", fullName: "Pierre Kalulu", pos: "CB", ovr: 104, type: "utoty", nation: "🇫🇷", stats: { PAC: 104, SHO: 68, PAS: 88, DRI: 91, DEF: 106, PHY: 104 } },
+        { name: "Sánchez", fullName: "Davinson Sánchez", pos: "CB", ovr: 104, type: "utoty", nation: "🇨🇴", stats: { PAC: 101, SHO: 66, PAS: 84, DRI: 85, DEF: 106, PHY: 109 } },
+        { name: "Gusto", fullName: "Malo Gusto", pos: "RB", ovr: 105, type: "utoty", nation: "🇫🇷", stats: { PAC: 112, SHO: 82, PAS: 101, DRI: 104, DEF: 102, PHY: 98 } }
+      ],
+      gk: [
+        { name: "Çakır", fullName: "Uğurcan Çakır", pos: "GK", ovr: 105, type: "utoty", nation: "🇹🇷", stats: { DIV: 107, POS: 105, HAN: 104, REF: 109, KIC: 98, PHY: 101 } }
+      ]
+    };
+
+    function createPlayerCardHTML(player) {
+      const cardTheme = player.type === 'icon' ? 'fc-card-icon' : 'fc-card-utoty text-white';
+      const subText = player.type === 'icon' ? 'text-slate-900' : 'text-sky-200';
+      const playerJson = encodeURIComponent(JSON.stringify(player));
+      return `
+        <div onclick="inspectPlayer('${playerJson}')" class="fc-card ${cardTheme} w-24 sm:w-28 md:w-32 pt-2.5 pb-3 px-1.5 text-center cursor-pointer shadow-xl select-none">
+          <div class="flex items-center justify-between px-1.5 text-[10px] sm:text-xs font-black leading-none">
+            <span>${player.ovr}</span>
+            <span>${player.pos}</span>
+          </div>
+          <div class="my-1.5 w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-full bg-black/20 flex items-center justify-center text-lg sm:text-xl shadow-inner">
+            <i class="fa-solid ${player.pos === 'GK' ? 'fa-hands' : 'fa-user-astronaut'}"></i>
+          </div>
+          <div class="font-cyber font-bold text-[10px] sm:text-xs truncate px-0.5">${player.name}</div>
+          <div class="text-[10px] ${subText} font-semibold mt-0.5">${player.nation} FC PRO</div>
+        </div>
+      `;
+    }
+
+    function renderSquad() {
+      document.getElementById('rowAttack').innerHTML = squadData.attack.map(createPlayerCardHTML).join('');
+      document.getElementById('rowCam').innerHTML = squadData.cam.map(createPlayerCardHTML).join('');
+      document.getElementById('rowMid').innerHTML = squadData.mid.map(createPlayerCardHTML).join('');
+      document.getElementById('rowDef').innerHTML = squadData.def.map(createPlayerCardHTML).join('');
+      document.getElementById('rowGk').innerHTML = squadData.gk.map(createPlayerCardHTML).join('');
+    }
+
+    function updateLeftBack(selectedName) {
+      squadData.def[0] = lbPresets[selectedName];
+      renderSquad();
+    }
+
+    function inspectPlayer(encodedPlayer) {
+      const p = JSON.parse(decodeURIComponent(encodedPlayer));
+      const statsEntries = Object.entries(p.stats).map(([k, v]) => `
+        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center">
+          <span class="text-xs text-slate-400 font-bold">${k}</span>
+          <span class="text-sm font-cyber font-black text-yellow-400">${v}</span>
+        </div>
+      `).join('');
+
+      openModal(`
+        <div class="text-center space-y-4">
+          <div class="inline-block px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-300 text-xs font-bold">
+            ${p.ovr} OVR • ${p.pos} • ${p.nation}
+          </div>
+          <h3 class="font-cyber font-bold text-2xl text-white">${p.fullName || p.name}</h3>
+          <p class="text-xs text-slate-400">Abdullah Shafi's Starting 4-3-3 Attacking XI</p>
+          <div class="grid grid-cols-2 gap-2.5 text-left pt-2">
+            ${statsEntries}
+          </div>
+        </div>
+      `);
+    }
+
+    // ==========================================
+    // 4. 12 PLAYABLE MINI-GAMES ARCADE
+    // ==========================================
+    let soundEnabled = true;
+    let synth = null;
+
+    function playSFX(note = "C5", duration = "16n") {
+      if (!soundEnabled || typeof Tone === "undefined") return;
+      try {
+        if (Tone.context.state !== "running") Tone.start();
+        if (!synth) synth = new Tone.Synth({ oscillator: { type: "triangle" } }).toDestination();
+        synth.triggerAttackRelease(note, duration);
+      } catch (e) {}
+    }
+
+    function toggleArcadeSound() {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById("soundToggleBtn");
+      btn.innerHTML = soundEnabled
+        ? `<i class="fa-solid fa-volume-high mr-1"></i>SFX: ON`
+        : `<i class="fa-solid fa-volume-xmark mr-1"></i>SFX: OFF`;
+    }
+
+    const gamesList = [
+      { id: 0, name: "1. Cyber Space Defender", icon: "fa-shuttle-space", desc: "Blast incoming malware drones! Move Left/Right and Fire lasers." },
+      { id: 1, name: "2. Argentina Dribble Rush", icon: "fa-person-running", desc: "Dodge defenders as Messi (#10) and collect World Cup stars!" },
+      { id: 2, name: "3. Cyber Snake", icon: "fa-staff-snake", desc: "Eat glowing cyber nodes! Use Arrow Keys or on-screen controls." },
+      { id: 3, name: "4. Argentina Penalty", icon: "fa-futbol", desc: "Score past the goalkeeper for La Albiceleste!" },
+      { id: 4, name: "5. Tic-Tac-Toe AI", icon: "fa-xmark", desc: "Outsmart the Cyber AI in classic 3x3 strategy." },
+      { id: 5, name: "6. Rock Paper Scissors", icon: "fa-hand-scissors", desc: "Cyber Duel against the mainframe!" },
+      { id: 6, name: "7. Memory Match", icon: "fa-brain", desc: "Flip cards and match all tech & football pairs!" },
+      { id: 7, name: "8. Whack-a-Bug", icon: "fa-bug", desc: "Cyber Security Defense: Squash system bugs fast!" },
+      { id: 8, name: "9. Number Guess", icon: "fa-hashtag", desc: "Crack the secret security PIN between 1 and 100." },
+      { id: 9, name: "10. Math Speed Blitz", icon: "fa-calculator", desc: "Solve rapid-fire math equations before time runs out!" },
+      { id: 10, name: "11. Reflex Tester", icon: "fa-bolt", desc: "Test your pro FC Mobile reaction speed in milliseconds!" },
+      { id: 11, name: "12. Cyber Pong", icon: "fa-table-tennis-paddle-ball", desc: "Deflect the energy ball and beat the AI paddle!" }
+    ];
+
+    let currentGameId = 0;
+    let activeGameCleanup = null;
+
+    function renderGameButtons() {
+      const container = document.getElementById('gameSelectorGrid');
+      container.innerHTML = gamesList.map(g => `
+        <button onclick="launchGame(${g.id})" id="gameBtn-${g.id}"
+          class="p-3 rounded-2xl border text-left transition flex items-center gap-2.5 ${g.id === currentGameId ? 'bg-cyan-500/20 border-cyan-400 text-white shadow-lg shadow-cyan-500/10' : 'bg-[#0e1628] border-slate-800 text-slate-300 hover:border-cyan-500/40'}">
+          <i class="fa-solid ${g.icon} text-cyan-400 text-sm"></i>
+          <span class="text-xs font-bold truncate">${g.name}</span>
+        </button>
+      `).join('');
+    }
+
+    function setScoreDisplay(text) {
+      document.getElementById('activeGameScore').textContent = text;
+    }
+
+    function restartCurrentGame() {
+      launchGame(currentGameId);
+    }
+
+    function launchGame(id) {
+      if (activeGameCleanup) {
+        activeGameCleanup();
+        activeGameCleanup = null;
+      }
+      currentGameId = id;
+      renderGameButtons();
+
+      const game = gamesList[id];
+      document.getElementById('activeGameTitle').textContent = game.name;
+      document.getElementById('activeGameDesc').textContent = game.desc;
+      const stage = document.getElementById('gameStage');
+      stage.innerHTML = '';
+
+      switch (id) {
+        case 0: initSpaceDefenderGame(stage); break;
+        case 1: initArgentinaDribbleGame(stage); break;
+        case 2: initSnakeGame(stage); break;
+        case 3: initPenaltyGame(stage); break;
+        case 4: initTicTacToeGame(stage); break;
+        case 5: initRPSGame(stage); break;
+        case 6: initMemoryGame(stage); break;
+        case 7: initWhackBugGame(stage); break;
+        case 8: initGuessGame(stage); break;
+        case 9: initMathBlitzGame(stage); break;
+        case 10: initReflexGame(stage); break;
+        case 11: initPongGame(stage); break;
+      }
+    }
+
+    // --- GAME 1: CYBER SPACE DEFENDER ---
+    function initSpaceDefenderGame(stage) {
+      setScoreDisplay("Score: 0 | Lives: 3");
+      stage.innerHTML = `
+        <canvas id="spaceCanvas" width="360" height="320" class="rounded-2xl border-2 border-cyan-500/40 bg-slate-950 max-w-full"></canvas>
+        <div class="flex items-center gap-3 mt-4">
+          <button id="spLeft" class="px-5 py-3 rounded-xl bg-slate-800 active:bg-cyan-500 text-white font-bold"><i class="fa-solid fa-arrow-left"></i></button>
+          <button id="spFire" class="px-6 py-3 rounded-xl bg-rose-500 active:bg-rose-400 text-white font-cyber font-bold text-xs tracking-wider">FIRE LASER 🔥</button>
+          <button id="spRight" class="px-5 py-3 rounded-xl bg-slate-800 active:bg-cyan-500 text-white font-bold"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      `;
+      const canvas = document.getElementById('spaceCanvas');
+      const ctx = canvas.getContext('2d');
+      let shipX = 162, bullets = [], enemies = [], score = 0, lives = 3, gameOver = false;
+      let keys = {};
+
+      const fireLaser = () => {
+        if (gameOver) return;
+        bullets.push({ x: shipX + 16, y: 275 });
+        playSFX("G5", "32n");
+      };
+
+      const keyDown = (e) => {
+        if (["ArrowLeft", "ArrowRight", " "].includes(e.key)) e.preventDefault();
+        keys[e.key] = true;
+        if (e.key === " ") fireLaser();
+      };
+      const keyUp = (e) => { keys[e.key] = false; };
+      document.addEventListener("keydown", keyDown);
+      document.addEventListener("keyup", keyUp);
+
+      document.getElementById("spLeft").onclick = () => { shipX = Math.max(8, shipX - 24); };
+      document.getElementById("spRight").onclick = () => { shipX = Math.min(316, shipX + 24); };
+      document.getElementById("spFire").onclick = fireLaser;
+
+      const spawner = setInterval(() => {
+        if (!gameOver) {
+          enemies.push({ x: Math.random() * 320 + 10, y: -20, speed: 1.6 + Math.min(2.5, score / 150) });
+        }
+      }, 950);
+
+      const loop = setInterval(() => {
+        if (gameOver) return;
+        if (keys["ArrowLeft"]) shipX = Math.max(8, shipX - 5);
+        if (keys["ArrowRight"]) shipX = Math.min(316, shipX + 5);
+
+        ctx.fillStyle = "#020617";
+        ctx.fillRect(0, 0, 360, 320);
+
+        ctx.fillStyle = "rgba(0, 240, 255, 0.25)";
+        for (let i = 0; i < 15; i++) ctx.fillRect((i * 73) % 360, (i * 47 + Date.now() * 0.04) % 320, 2, 2);
+
+        // Player Cyber Ship
+        ctx.fillStyle = "#00f0ff";
+        ctx.beginPath();
+        ctx.moveTo(shipX + 18, 275);
+        ctx.lineTo(shipX, 305);
+        ctx.lineTo(shipX + 36, 305);
+        ctx.closePath();
+        ctx.fill();
+
+        // Bullets
+        ctx.fillStyle = "#facc15";
+        bullets.forEach(b => { b.y -= 7; ctx.fillRect(b.x, b.y, 4, 12); });
+        bullets = bullets.filter(b => b.y > -15);
+
+        // Enemies
+        enemies.forEach((en, eIdx) => {
+          en.y += en.speed;
+          ctx.fillStyle = "#f43f5e";
+          ctx.fillRect(en.x, en.y, 24, 20);
+          ctx.fillStyle = "#fff";
+          ctx.fillRect(en.x + 5, en.y + 6, 4, 4);
+          ctx.fillRect(en.x + 15, en.y + 6, 4, 4);
+
+          bullets.forEach((b, bIdx) => {
+            if (b.x < en.x + 24 && b.x + 4 > en.x && b.y < en.y + 20 && b.y + 12 > en.y) {
+              enemies.splice(eIdx, 1);
+              bullets.splice(bIdx, 1);
+              score += 15;
+              playSFX("C6", "32n");
+              setScoreDisplay(`Score: ${score} | Lives: ${lives}`);
+            }
+          });
+
+          if (en.y > 310) {
+            enemies.splice(eIdx, 1);
+            lives--;
+            playSFX("A2", "16n");
+            setScoreDisplay(`Score: ${score} | Lives: ${lives}`);
+            if (lives <= 0) {
+              gameOver = true;
+              ctx.fillStyle = "rgba(0,0,0,0.8)";
+              ctx.fillRect(0, 0, 360, 320);
+              ctx.fillStyle = "#f43f5e";
+              ctx.font = "bold 22px Orbitron, sans-serif";
+              ctx.textAlign = "center";
+              ctx.fillText("SYSTEM BREACHED!", 180, 145);
+              ctx.fillStyle = "#fff";
+              ctx.font = "14px Inter, sans-serif";
+              ctx.fillText(`Final Score: ${score} • Click Restart`, 180, 178);
+            }
+          }
+        });
+      }, 25);
+
+      activeGameCleanup = () => {
+        clearInterval(loop);
+        clearInterval(spawner);
+        document.removeEventListener("keydown", keyDown);
+        document.removeEventListener("keyup", keyUp);
+      };
+    }
+
+    // --- GAME 2: ARGENTINA DRIBBLE RUSH ---
+    function initArgentinaDribbleGame(stage) {
+      setScoreDisplay("Stars: 0");
+      stage.innerHTML = `
+        <canvas id="dribbleCanvas" width="320" height="320" class="rounded-2xl border-2 border-sky-400/50 bg-emerald-900 max-w-full"></canvas>
+        <div class="flex gap-4 mt-4">
+          <button id="drLeft" class="px-6 py-3 rounded-xl bg-sky-500 active:bg-sky-400 text-slate-950 font-bold"><i class="fa-solid fa-arrow-left mr-1"></i>Dodge Left</button>
+          <button id="drRight" class="px-6 py-3 rounded-xl bg-sky-500 active:bg-sky-400 text-slate-950 font-bold">Dodge Right<i class="fa-solid fa-arrow-right ml-1"></i></button>
+        </div>
+      `;
+      const canvas = document.getElementById("dribbleCanvas");
+      const ctx = canvas.getContext("2d");
+      const lanes = [55, 160, 265];
+      let currentLane = 1, obstacles = [], stars = 0, alive = true;
+
+      const moveLeft = () => { if (alive && currentLane > 0) { currentLane--; playSFX("E5", "32n"); } };
+      const moveRight = () => { if (alive && currentLane < 2) { currentLane++; playSFX("E5", "32n"); } };
+
+      const keyHandler = (e) => {
+        if (e.key === "ArrowLeft") { e.preventDefault(); moveLeft(); }
+        if (e.key === "ArrowRight") { e.preventDefault(); moveRight(); }
+      };
+      document.addEventListener("keydown", keyHandler);
+      document.getElementById("drLeft").onclick = moveLeft;
+      document.getElementById("drRight").onclick = moveRight;
+
+      const spawn = setInterval(() => {
+        if (!alive) return;
+        const lane = Math.floor(Math.random() * 3);
+        const isStar = Math.random() > 0.65;
+        obstacles.push({ lane, y: -25, type: isStar ? "STAR" : "DEF", speed: 3.5 + Math.min(3.5, stars * 0.12) });
+      }, 750);
+
+      const loop = setInterval(() => {
+        if (!alive) return;
+        ctx.fillStyle = "#14532d";
+        ctx.fillRect(0, 0, 320, 320);
+
+        ctx.strokeStyle = "rgba(255,255,255,0.2)";
+        ctx.setLineDash([10, 10]);
+        ctx.beginPath();
+        ctx.moveTo(107, 0); ctx.lineTo(107, 320);
+        ctx.moveTo(213, 0); ctx.lineTo(213, 320);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        const px = lanes[currentLane];
+        ctx.fillStyle = "#75aadb";
+        ctx.beginPath();
+        ctx.arc(px, 270, 16, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = "#0f172a";
+        ctx.font = "bold 11px Inter, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("10", px, 274);
+
+        obstacles.forEach((ob, idx) => {
+          ob.y += ob.speed;
+          const ox = lanes[ob.lane];
+          if (ob.type === "STAR") {
+            ctx.font = "22px sans-serif";
+            ctx.fillText("⭐", ox, ob.y);
+          } else {
+            ctx.fillStyle = "#ef4444";
+            ctx.fillRect(ox - 16, ob.y - 14, 32, 24);
+            ctx.fillStyle = "#fff";
+            ctx.font = "bold 10px sans-serif";
+            ctx.fillText("DEF", ox, ob.y + 2);
+          }
+
+          if (ob.lane === currentLane && Math.abs(ob.y - 270) < 24) {
+            if (ob.type === "STAR") {
+              obstacles.splice(idx, 1);
+              stars++;
+              playSFX("B5", "32n");
+              setScoreDisplay(`Stars: ${stars} ⭐⭐⭐`);
+            } else {
+              alive = false;
+              playSFX("G2", "8n");
+              ctx.fillStyle = "rgba(0,0,0,0.8)";
+              ctx.fillRect(0, 0, 320, 320);
+              ctx.fillStyle = "#38bdf8";
+              ctx.font = "bold 20px Orbitron, sans-serif";
+              ctx.fillText("TACKLED!", 160, 150);
+              ctx.fillStyle = "#fff";
+              ctx.font = "14px Inter, sans-serif";
+              ctx.fillText(`Stars Collected: ${stars} • Click Restart`, 160, 180);
+            }
+          }
+        });
+        obstacles = obstacles.filter(o => o.y < 345);
+      }, 25);
+
+      activeGameCleanup = () => {
+        clearInterval(loop);
+        clearInterval(spawn);
+        document.removeEventListener("keydown", keyHandler);
+      };
+    }
+
+    // --- GAME 3: CYBER SNAKE ---
+    function initSnakeGame(stage) {
+      setScoreDisplay("Score: 0");
+      stage.innerHTML = `
+        <canvas id="snakeCanvas" width="320" height="320" class="rounded-2xl border-2 border-cyan-500/40 bg-slate-950 max-w-full"></canvas>
+        <div class="grid grid-cols-3 gap-2 mt-4 w-44">
+          <div></div>
+          <button id="snUp" class="p-3 rounded-xl bg-slate-800 active:bg-cyan-500 text-white"><i class="fa-solid fa-arrow-up"></i></button>
+          <div></div>
+          <button id="snLeft" class="p-3 rounded-xl bg-slate-800 active:bg-cyan-500 text-white"><i class="fa-solid fa-arrow-left"></i></button>
+          <button id="snDown" class="p-3 rounded-xl bg-slate-800 active:bg-cyan-500 text-white"><i class="fa-solid fa-arrow-down"></i></button>
+          <button id="snRight" class="p-3 rounded-xl bg-slate-800 active:bg-cyan-500 text-white"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      `;
+      const canvas = document.getElementById('snakeCanvas');
+      const ctx = canvas.getContext('2d');
+      const box = 16;
+      let snake = [{ x: 10 * box, y: 10 * box }];
+      let dir = 'RIGHT';
+      let food = { x: Math.floor(Math.random() * 19) * box, y: Math.floor(Math.random() * 19) * box };
+      let score = 0;
+
+      const setDir = (newDir) => {
+        if (newDir === 'LEFT' && dir !== 'RIGHT') dir = 'LEFT';
+        if (newDir === 'UP' && dir !== 'DOWN') dir = 'UP';
+        if (newDir === 'RIGHT' && dir !== 'LEFT') dir = 'RIGHT';
+        if (newDir === 'DOWN' && dir !== 'UP') dir = 'DOWN';
+      };
+
+      const keyHandler = (e) => {
+        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) e.preventDefault();
+        if (e.key === 'ArrowLeft') setDir('LEFT');
+        if (e.key === 'ArrowUp') setDir('UP');
+        if (e.key === 'ArrowRight') setDir('RIGHT');
+        if (e.key === 'ArrowDown') setDir('DOWN');
+      };
+      document.addEventListener('keydown', keyHandler);
+      document.getElementById('snUp').onclick = () => setDir('UP');
+      document.getElementById('snDown').onclick = () => setDir('DOWN');
+      document.getElementById('snLeft').onclick = () => setDir('LEFT');
+      document.getElementById('snRight').onclick = () => setDir('RIGHT');
+
+      const loop = setInterval(() => {
+        ctx.fillStyle = '#020617';
+        ctx.fillRect(0, 0, 320, 320);
+
+        ctx.fillStyle = '#facc15';
+        ctx.fillRect(food.x, food.y, box, box);
+
+        snake.forEach((part, i) => {
+          ctx.fillStyle = i === 0 ? '#00f0ff' : '#0284c7';
+          ctx.fillRect(part.x, part.y, box - 1, box - 1);
+        });
+
+        let headX = snake[0].x;
+        let headY = snake[0].y;
+        if (dir === 'LEFT') headX -= box;
+        if (dir === 'UP') headY -= box;
+        if (dir === 'RIGHT') headX += box;
+        if (dir === 'DOWN') headY += box;
+
+        if (headX === food.x && headY === food.y) {
+          score += 10;
+          setScoreDisplay(`Score: ${score}`);
+          playSFX("E6", "32n");
+          food = { x: Math.floor(Math.random() * 19) * box, y: Math.floor(Math.random() * 19) * box };
+        } else {
+          snake.pop();
+        }
+
+        const newHead = { x: headX, y: headY };
+        const hitWall = headX < 0 || headY < 0 || headX >= 320 || headY >= 320;
+        const hitSelf = snake.some(s => s.x === newHead.x && s.y === newHead.y);
+
+        if (hitWall || hitSelf) {
+          clearInterval(loop);
+          playSFX("C2", "8n");
+          ctx.fillStyle = 'rgba(0,0,0,0.75)';
+          ctx.fillRect(0, 0, 320, 320);
+          ctx.fillStyle = '#f43f5e';
+          ctx.font = 'bold 22px Orbitron, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('GAME OVER!', 160, 150);
+          ctx.fillStyle = '#fff';
+          ctx.font = '14px Inter, sans-serif';
+          ctx.fillText(`Final Score: ${score} (Click Restart)`, 160, 180);
+          return;
+        }
+        snake.unshift(newHead);
+      }, 130);
+
+      activeGameCleanup = () => {
+        clearInterval(loop);
+        document.removeEventListener('keydown', keyHandler);
+      };
+    }
+
+    // --- GAME 4: ARGENTINA PENALTY SHOOTOUT ---
+    function initPenaltyGame(stage) {
+      let goals = 0, shots = 0;
+      setScoreDisplay("Goals: 0 / 0");
+      stage.innerHTML = `
+        <div class="w-full max-w-md text-center space-y-5">
+          <div class="h-48 rounded-2xl bg-emerald-800 border-4 border-white/40 relative flex flex-col justify-between p-4 overflow-hidden">
+            <div class="border-2 border-white/60 h-24 w-4/5 mx-auto rounded-t-xl relative flex items-end justify-center">
+              <div id="keeperEmoji" class="text-4xl transition-all duration-300 mb-1">🧤</div>
+            </div>
+            <div id="penaltyMsg" class="text-sm font-bold text-yellow-300">Pick a corner to shoot for Argentina 🇦🇷!</div>
+            <div id="ballEmoji" class="text-3xl transition-all duration-300">⚽</div>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <button onclick="shootPenalty('LEFT')" class="py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm">Top Left ↖</button>
+            <button onclick="shootPenalty('CENTER')" class="py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm">Center ⬆</button>
+            <button onclick="shootPenalty('RIGHT')" class="py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm">Top Right ↗</button>
+          </div>
+        </div>
+      `;
+      window.shootPenalty = (choice) => {
+        const dirs = ['LEFT', 'CENTER', 'RIGHT'];
+        const keeperChoice = dirs[Math.floor(Math.random() * 3)];
+        const keeper = document.getElementById('keeperEmoji');
+        keeper.style.transform = keeperChoice === 'LEFT' ? 'translateX(-70px)' : keeperChoice === 'RIGHT' ? 'translateX(70px)' : 'translateX(0)';
+        shots++;
+        if (choice !== keeperChoice) {
+          goals++;
+          playSFX("C6", "16n");
+          document.getElementById('penaltyMsg').innerHTML = `<span class="text-emerald-300">GOLAZO!! Argentina scores! 🇦🇷⭐⭐⭐</span>`;
+        } else {
+          playSFX("F2", "16n");
+          document.getElementById('penaltyMsg').innerHTML = `<span class="text-rose-300">SAVED! Keeper guessed ${keeperChoice}!</span>`;
+        }
+        setScoreDisplay(`Goals: ${goals} / ${shots}`);
+      };
+    }
+
+    // --- GAME 5: TIC-TAC-TOE VS AI ---
+    function initTicTacToeGame(stage) {
+      let board = Array(9).fill('');
+      let active = true;
+      setScoreDisplay("Your Turn (X)");
+
+      const render = () => {
+        stage.innerHTML = `
+          <div class="grid grid-cols-3 gap-2.5 w-64 sm:w-72">
+            ${board.map((cell, i) => `
+              <button onclick="playTTT(${i})" class="h-20 sm:h-24 rounded-2xl bg-slate-900 border border-slate-700 hover:border-cyan-400 text-3xl font-cyber font-black ${cell === 'X' ? 'text-cyan-400' : 'text-amber-400'}">
+                ${cell}
+              </button>
+            `).join('')}
+          </div>
+          <p id="tttStatus" class="mt-4 text-sm font-bold text-slate-300">Tap any square to place X</p>
+        `;
+      };
+
+      const checkWin = (b, p) => {
+        const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+        return wins.some(combo => combo.every(idx => b[idx] === p));
+      };
+
+      window.playTTT = (idx) => {
+        if (!active || board[idx] !== '') return;
+        board[idx] = 'X';
+        playSFX("A4", "32n");
+        if (checkWin(board, 'X')) {
+          active = false;
+          render();
+          playSFX("C6", "8n");
+          document.getElementById('tttStatus').innerHTML = `<span class="text-emerald-400">Victory! Abdullah Shafi beats the AI! 🏆</span>`;
+          setScoreDisplay("Winner: X");
+          return;
+        }
+        if (!board.includes('')) {
+          active = false;
+          render();
+          document.getElementById('tttStatus').textContent = "Draw Match!";
+          setScoreDisplay("Draw");
+          return;
+        }
+        const empty = board.map((v, i) => v === '' ? i : null).filter(v => v !== null);
+        const aiMove = empty[Math.floor(Math.random() * empty.length)];
+        board[aiMove] = 'O';
+        playSFX("E4", "32n");
+        if (checkWin(board, 'O')) {
+          active = false;
+          render();
+          document.getElementById('tttStatus').innerHTML = `<span class="text-rose-400">Cyber AI wins this round!</span>`;
+          setScoreDisplay("Winner: AI");
+          return;
+        }
+        render();
+      };
+      render();
+    }
+
+    // --- GAME 6: ROCK PAPER SCISSORS ---
+    function initRPSGame(stage) {
+      let wins = 0, losses = 0;
+      setScoreDisplay("Wins: 0 | AI: 0");
+      stage.innerHTML = `
+        <div class="text-center space-y-6 max-w-md">
+          <div id="rpsResultBox" class="p-6 rounded-2xl bg-slate-900 border border-slate-800 text-lg font-bold text-cyan-300">
+            Choose Rock, Paper, or Scissors!
+          </div>
+          <div class="flex justify-center gap-4">
+            <button onclick="playRPS('Rock')" class="px-5 py-4 rounded-2xl bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 font-bold transition text-2xl">🪨<span class="block text-xs mt-1">Rock</span></button>
+            <button onclick="playRPS('Paper')" class="px-5 py-4 rounded-2xl bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 font-bold transition text-2xl">📄<span class="block text-xs mt-1">Paper</span></button>
+            <button onclick="playRPS('Scissors')" class="px-5 py-4 rounded-2xl bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 font-bold transition text-2xl">✂️<span class="block text-xs mt-1">Scissors</span></button>
+          </div>
+        </div>
+      `;
+      window.playRPS = (user) => {
+        const opts = ['Rock', 'Paper', 'Scissors'];
+        const ai = opts[Math.floor(Math.random() * 3)];
+        let msg = '';
+        if (user === ai) {
+          msg = `Tie! Both picked ${user}.`;
+          playSFX("D4", "32n");
+        } else if ((user === 'Rock' && ai === 'Scissors') || (user === 'Paper' && ai === 'Rock') || (user === 'Scissors' && ai === 'Paper')) {
+          wins++;
+          msg = `You Win! ${user} beats ${ai}! 🎉`;
+          playSFX("G5", "16n");
+        } else {
+          losses++;
+          msg = `AI Wins! ${ai} beats ${user}.`;
+          playSFX("C3", "16n");
+        }
+        document.getElementById('rpsResultBox').textContent = msg;
+        setScoreDisplay(`Wins: ${wins} | AI: ${losses}`);
+      };
+    }
+
+    // --- GAME 7: MEMORY CARD MATCH ---
+    function initMemoryGame(stage) {
+      const icons = ['🛡️', '⚽', '🤖', '💻', '🇦🇷', '🏆', '🛡️', '⚽', '🤖', '💻', '🇦🇷', '🏆']
+        .sort(() => Math.random() - 0.5);
+      let flipped = [];
+      let matched = 0;
+      setScoreDisplay("Pairs: 0 / 6");
+
+      stage.innerHTML = `
+        <div class="grid grid-cols-4 gap-3 w-full max-w-sm">
+          ${icons.map((ic, idx) => `
+            <button id="mem-${idx}" onclick="flipMem(${idx}, '${ic}')" class="h-16 sm:h-20 rounded-2xl bg-slate-900 border border-cyan-500/30 text-2xl font-bold flex items-center justify-center hover:border-cyan-400 transition">
+              ❓
+            </button>
+          `).join('')}
+        </div>
+      `;
+
+      window.flipMem = (idx, ic) => {
+        const btn = document.getElementById(`mem-${idx}`);
+        if (flipped.length >= 2 || btn.dataset.done || flipped.some(f => f.idx === idx)) return;
+        btn.textContent = ic;
+        btn.classList.add('bg-cyan-500/20');
+        playSFX("E5", "32n");
+        flipped.push({ idx, ic, btn });
+
+        if (flipped.length === 2) {
+          if (flipped[0].ic === flipped[1].ic) {
+            flipped[0].btn.dataset.done = "1";
+            flipped[1].btn.dataset.done = "1";
+            matched++;
+            playSFX("C6", "16n");
+            setScoreDisplay(`Pairs: ${matched} / 6`);
+            flipped = [];
+          } else {
+            setTimeout(() => {
+              flipped.forEach(f => { f.btn.textContent = '❓'; f.btn.classList.remove('bg-cyan-500/20'); });
+              flipped = [];
+            }, 650);
+          }
+        }
+      };
+    }
+
+    // --- GAME 8: WHACK-A-BUG (CYBER DEFENSE) ---
+    function initWhackBugGame(stage) {
+      let score = 0;
+      let activeHole = -1;
+      setScoreDisplay("Bugs Squashed: 0");
+
+      stage.innerHTML = `
+        <div class="grid grid-cols-3 gap-3 w-72 sm:w-80">
+          ${Array.from({ length: 9 }).map((_, i) => `
+            <button id="bugHole-${i}" onclick="whackBug(${i})" class="h-20 sm:h-24 rounded-2xl bg-slate-900 border border-slate-700 text-3xl flex items-center justify-center">
+              🕳️
+            </button>
+          `).join('')}
+        </div>
+      `;
+
+      const timer = setInterval(() => {
+        if (activeHole >= 0) document.getElementById(`bugHole-${activeHole}`).textContent = '🕳️';
+        activeHole = Math.floor(Math.random() * 9);
+        document.getElementById(`bugHole-${activeHole}`).textContent = '👾';
+      }, 750);
+
+      window.whackBug = (i) => {
+        if (i === activeHole) {
+          score++;
+          playSFX("A6", "32n");
+          setScoreDisplay(`Bugs Squashed: ${score}`);
+          document.getElementById(`bugHole-${i}`).textContent = '💥';
+          activeHole = -1;
+        }
+      };
+
+      activeGameCleanup = () => clearInterval(timer);
+    }
+
+    // --- GAME 9: NUMBER GUESSING CHALLENGE ---
+    function initGuessGame(stage) {
+      const secret = Math.floor(Math.random() * 100) + 1;
+      let tries = 0;
+      setScoreDisplay("Attempts: 0");
+      stage.innerHTML = `
+        <div class="max-w-sm w-full text-center space-y-4">
+          <p id="guessHint" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-cyan-300 font-semibold">
+            I locked a number between 1 and 100. Can you crack it?
+          </p>
+          <input type="number" id="guessInput" placeholder="Enter 1 - 100" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-center font-bold" />
+          <button onclick="checkGuess()" class="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold">Submit Guess</button>
+        </div>
+      `;
+      window.checkGuess = () => {
+        const val = parseInt(document.getElementById('guessInput').value);
+        if (isNaN(val)) return;
+        tries++;
+        setScoreDisplay(`Attempts: ${tries}`);
+        const hint = document.getElementById('guessHint');
+        if (val === secret) {
+          playSFX("C6", "8n");
+          hint.innerHTML = `<span class="text-emerald-400">🔓 ACCESS GRANTED! ${secret} cracked in ${tries} tries!</span>`;
+        } else if (val < secret) {
+          playSFX("F4", "32n");
+          hint.textContent = `⬆️ Too LOW! Aim higher than ${val}.`;
+        } else {
+          playSFX("F4", "32n");
+          hint.textContent = `⬇️ Too HIGH! Aim lower than ${val}.`;
+        }
+      };
+    }
+
+    // --- GAME 10: MATH SPEED BLITZ ---
+    function initMathBlitzGame(stage) {
+      let score = 0;
+      let currentAns = 0;
+      setScoreDisplay("Score: 0");
+
+      const nextQ = () => {
+        const a = Math.floor(Math.random() * 20) + 5;
+        const b = Math.floor(Math.random() * 15) + 3;
+        currentAns = a + b;
+        stage.innerHTML = `
+          <div class="max-w-sm w-full text-center space-y-4">
+            <div class="text-3xl font-cyber font-black text-amber-400 p-5 rounded-2xl bg-slate-900 border border-amber-400/30">
+              ${a} + ${b} = ?
+            </div>
+            <input type="number" id="mathAnsInput" placeholder="Type answer" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-center font-bold" />
+            <button onclick="submitMath()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold">Check Answer</button>
+          </div>
+        `;
+        document.getElementById('mathAnsInput').focus();
+      };
+
+      window.submitMath = () => {
+        const val = parseInt(document.getElementById('mathAnsInput').value);
+        if (val === currentAns) {
+          score += 10;
+          playSFX("G5", "32n");
+          setScoreDisplay(`Score: ${score}`);
+          nextQ();
+        } else {
+          playSFX("C3", "32n");
+          setScoreDisplay(`Wrong! Ans was ${currentAns} | Score: ${score}`);
+          nextQ();
+        }
+      };
+      nextQ();
+    }
+
+    // --- GAME 11: REACTION TIME TESTER ---
+    function initReflexGame(stage) {
+      let state = 'idle';
+      let startTime = 0;
+      let timeoutId = null;
+      setScoreDisplay("Best: -- ms");
+
+      stage.innerHTML = `
+        <button id="reflexBox" onclick="handleReflexClick()" class="w-full max-w-md h-56 rounded-3xl bg-slate-800 border-2 border-cyan-500/40 flex flex-col items-center justify-center p-6 text-center transition cursor-pointer">
+          <span class="text-2xl font-cyber font-bold text-white">Tap to Start Reflex Test</span>
+          <span class="text-xs text-slate-400 mt-2">Wait for GREEN, then click as fast as possible!</span>
+        </button>
+      `;
+
+      window.handleReflexClick = () => {
+        const box = document.getElementById('reflexBox');
+        if (state === 'idle' || state === 'done') {
+          state = 'waiting';
+          box.className = "w-full max-w-md h-56 rounded-3xl bg-rose-600 flex flex-col items-center justify-center p-6 text-center cursor-pointer";
+          box.innerHTML = `<span class="text-2xl font-cyber font-bold text-white">WAIT FOR GREEN...</span>`;
+          timeoutId = setTimeout(() => {
+            state = 'ready';
+            startTime = performance.now();
+            box.className = "w-full max-w-md h-56 rounded-3xl bg-emerald-500 flex flex-col items-center justify-center p-6 text-center cursor-pointer";
+            box.innerHTML = `<span class="text-3xl font-cyber font-black text-slate-950">CLICK NOW!! ⚡</span>`;
+            playSFX("C6", "16n");
+          }, 1500 + Math.random() * 2500);
+        } else if (state === 'waiting') {
+          clearTimeout(timeoutId);
+          state = 'done';
+          box.className = "w-full max-w-md h-56 rounded-3xl bg-slate-800 flex flex-col items-center justify-center p-6 text-center cursor-pointer";
+          box.innerHTML = `<span class="text-xl font-bold text-amber-400">Too Early! Tap to try again.</span>`;
+        } else if (state === 'ready') {
+          const diff = Math.round(performance.now() - startTime);
+          state = 'done';
+          playSFX("E6", "16n");
+          setScoreDisplay(`Reflex: ${diff} ms`);
+          box.className = "w-full max-w-md h-56 rounded-3xl bg-cyan-500/20 border-2 border-cyan-400 flex flex-col items-center justify-center p-6 text-center cursor-pointer";
+          box.innerHTML = `<span class="text-3xl font-cyber font-black text-cyan-300">${diff} ms</span><span class="text-xs text-slate-300 mt-2">Pro Gamer Speed! Tap to test again.</span>`;
+        }
+      };
+      activeGameCleanup = () => clearTimeout(timeoutId);
+    }
+
+    // --- GAME 12: CYBER PONG ARCADE ---
+    function initPongGame(stage) {
+      setScoreDisplay("Player: 0 | AI: 0");
+      stage.innerHTML = `
+        <canvas id="pongCanvas" width="340" height="240" class="rounded-2xl border-2 border-cyan-500/40 bg-slate-950 max-w-full cursor-pointer"></canvas>
+        <p class="text-xs text-slate-400 mt-3">Move mouse or touch/drag inside the arena to control your left paddle!</p>
+      `;
+      const canvas = document.getElementById('pongCanvas');
+      const ctx = canvas.getContext('2d');
+      let pY = 90, aiY = 90, bx = 170, by = 120, vx = 3, vy = 2.5, pScore = 0, aiScore = 0;
+
+      const movePaddle = (clientY) => {
+        const rect = canvas.getBoundingClientRect();
+        pY = Math.max(0, Math.min(180, clientY - rect.top - 30));
+      };
+      canvas.addEventListener('mousemove', e => movePaddle(e.clientY));
+      canvas.addEventListener('touchmove', e => { e.preventDefault(); movePaddle(e.touches[0].clientY); }, { passive: false });
+
+      const loop = setInterval(() => {
+        bx += vx; by += vy;
+        if (by <= 6 || by >= 234) vy *= -1;
+
+        if (aiY + 30 < by) aiY += 2.3;
+        else aiY -= 2.3;
+
+        if (bx <= 18 && by >= pY && by <= pY + 60) {
+          vx = Math.abs(vx) * 1.03;
+          playSFX("D5", "32n");
+        }
+        if (bx >= 322 && by >= aiY && by <= aiY + 60) {
+          vx = -Math.abs(vx) * 1.03;
+          playSFX("A4", "32n");
+        }
+
+        if (bx < 0) { aiScore++; bx = 170; by = 120; vx = 3; }
+        if (bx > 340) { pScore++; bx = 170; by = 120; vx = -3; }
+        setScoreDisplay(`Player: ${pScore} | AI: ${aiScore}`);
+
+        ctx.fillStyle = '#020617';
+        ctx.fillRect(0, 0, 340, 240);
+        ctx.fillStyle = '#00f0ff';
+        ctx.fillRect(8, pY, 8, 60);
+        ctx.fillStyle = '#facc15';
+        ctx.fillRect(324, aiY, 8, 60);
+        ctx.beginPath();
+        ctx.arc(bx, by, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff';
+        ctx.fill();
+      }, 20);
+
+      activeGameCleanup = () => clearInterval(loop);
+    }
+
+    // ==========================================
+    // 5. SMART UTILITY TOOLS LAB
+    // ==========================================
+    function checkLeapYear() {
+      const year = parseInt(document.getElementById('leapYearInput').value);
+      const box = document.getElementById('leapYearResult');
+      if (isNaN(year)) {
+        box.innerHTML = `<span class="text-rose-400 font-semibold">Please enter a valid year!</span>`;
+        return;
+      }
+      const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+      if (isLeap) {
+        box.innerHTML = `
+          <div class="text-emerald-400 font-bold">✅ ${year} IS a Leap Year!</div>
+          <div class="text-xs text-slate-400 mt-1">Reason: Divisible by 4${year % 100 === 0 ? ' and also divisible by 400' : ' and not a century exception'}. February has 29 days.</div>
+        `;
+      } else {
+        box.innerHTML = `
+          <div class="text-rose-400 font-bold">❌ ${year} is NOT a Leap Year.</div>
+          <div class="text-xs text-slate-400 mt-1">Reason: ${year % 4 !== 0 ? 'Not divisible by 4.' : 'Divisible by 100 but not by 400.'} February has 28 days.</div>
+        `;
+      }
+    }
+
+    function checkOddEven() {
+      const raw = document.getElementById('oddEvenInput').value.trim();
+      const box = document.getElementById('oddEvenResult');
+      if (!/^-?\d+$/.test(raw)) {
+        box.innerHTML = `<span class="text-rose-400 font-semibold">Please enter a valid whole integer!</span>`;
+        return;
+      }
+      const num = BigInt(raw);
+      const isEven = num % 2n === 0n;
+      const digitSum = raw.replace('-', '').split('').reduce((acc, d) => acc + Number(d), 0);
+
+      box.innerHTML = `
+        <div class="${isEven ? 'text-cyan-400' : 'text-amber-400'} font-bold text-base">
+          ${isEven ? '🔵 EVEN Number' : '🟠 ODD Number'}
+        </div>
+        <div class="text-xs text-slate-400 mt-1">
+          Number: <strong class="text-white">${raw}</strong> • Sum of digits: <strong class="text-purple-300">${digitSum}</strong>
+        </div>
+      `;
+    }
+
+    function compareNumbers() {
+      const raw = document.getElementById('compareNumbersInput').value;
+      const box = document.getElementById('compareNumbersResult');
+      const nums = raw.split(/[\s,]+/).map(Number).filter(n => !isNaN(n));
+
+      if (nums.length < 2) {
+        box.innerHTML = `<span class="text-rose-400 font-semibold">Enter at least 2 numbers separated by commas or spaces!</span>`;
+        return;
+      }
+      const biggest = Math.max(...nums);
+      const smallest = Math.min(...nums);
+      const diff = biggest - smallest;
+
+      box.innerHTML = `
+        <div class="flex justify-between text-xs sm:text-sm font-bold">
+          <span class="text-emerald-400">Biggest: ${biggest}</span>
+          <span class="text-rose-400">Smallest: ${smallest}</span>
+        </div>
+        <div class="text-xs text-slate-400 mt-1.5">
+          Difference: <strong class="text-white">${diff}</strong> • Count: ${nums.length} numbers
+        </div>
+      `;
+    }
+
+    // ==========================================
+    // 6. INTERACTIVE BANGLADESH MAP (LEAFLET)
+    // ==========================================
+    let bdMap;
+    const narsingdiCoords = [23.9229, 90.7177];
+
+    function initBangladeshMap() {
+      bdMap = L.map('bangladeshMap').setView([23.85, 90.35], 7);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap &copy; CARTO',
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(bdMap);
+
+      const pulseIcon = L.divIcon({
+        className: 'custom-div-icon',
+        html: `
+          <div class="relative flex items-center justify-center w-8 h-8">
+            <span class="absolute w-8 h-8 rounded-full bg-rose-500/50 map-pulse"></span>
+            <span class="relative w-4 h-4 rounded-full bg-rose-500 border-2 border-white shadow-lg"></span>
+          </div>
+        `,
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
+      });
+
+      const marker = L.marker(narsingdiCoords, { icon: pulseIcon }).addTo(bdMap);
+      marker.bindPopup(`
+        <div style="color:#0f172a; font-family:Inter,sans-serif; min-width:190px;">
+          <strong style="font-size:14px; color:#0284c7;">📍 Abdullah Shafi HQ</strong><br/>
+          <span style="font-size:12px;">Balanagar, Narsingdi, Bangladesh 🇧🇩</span><br/>
+          <span style="font-size:11px; color:#475569;">School: Nasima Kadir Molla High School & Homes</span>
+        </div>
+      `).openPopup();
+    }
+
+    function zoomToNarsingdi() {
+      bdMap.flyTo(narsingdiCoords, 14, { duration: 1.5 });
+    }
+
+    function zoomToBangladesh() {
+      bdMap.flyTo([23.85, 90.35], 7, { duration: 1.5 });
+    }
+
+    // ==========================================
+    // INITIALIZE ALL SECTIONS ON LOAD
+    // ==========================================
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCertificates();
+      renderSquad();
+      launchGame(0);
+      initBangladeshMap();
+    });
+  </script>
+</body>
+</html>
